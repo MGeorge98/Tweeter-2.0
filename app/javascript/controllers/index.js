@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
+import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
+import NavController from "./nav_controller.js"
+application.register("nav", NavController)
+
+import ResetFormController from "./reset_form_controller.js"
+application.register("reset-form", ResetFormController)
