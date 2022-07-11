@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  include Pagy::Backend
+  before_action :turbo_frame_request_variant
+  
+  private
+
+  def turbo_frame_request_variant
+    request.variant = :turbo_frame if turbo_frame_request?
+  end
+
   private
 
   def layout_by_resource

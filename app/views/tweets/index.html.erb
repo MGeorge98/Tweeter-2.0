@@ -2,7 +2,7 @@
 <div class="mb-8">
   <%= render "form" %>
 </div>
-
+<%= turbo_frame_tag "page_handler" %>
 <%= turbo_frame_tag "tweets" do %>
   <% @tweets.each do |tweet| %>
     <%= render partial: "tweets/#{tweet.tweet_type}", locals: { tweet: tweet } %>
@@ -13,3 +13,5 @@
     <%= render "empty" %>
   <% end %>
 <% end %>
+<%= render "pager", pagy: @pagy %>
+<%#= pagy_nav(@pagy) %>

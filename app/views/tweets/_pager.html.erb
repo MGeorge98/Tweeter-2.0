@@ -1,0 +1,14 @@
+<div id="pager" class="min-w-full my-8 flex justify-center">
+  <div>
+    <% if pagy.next %>
+      <%= link_to(
+        "Load more tweets",
+        tweets_path(page: pagy.next),
+        class: "rounded py-3 px-5 bg-sky-400 text-white block hover:bg-sky-500",
+        data: {
+          turbo_frame: "page_handler"
+        }
+      ) %>
+    <% end %>
+  </div>
+</div>

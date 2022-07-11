@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
 
   def index
     @tweet = Tweet.new
-    @tweets = Tweet.all.order(created_at: :desc)
+    @pagy, @tweets = pagy(Tweet.all.order(created_at: :desc))
   end
 
   def create
@@ -53,4 +53,5 @@ class TweetsController < ApplicationController
     def tweet_params
       params.require(:tweet).permit(:body, :tweet_id)
     end
+
 end

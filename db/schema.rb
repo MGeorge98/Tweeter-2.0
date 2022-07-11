@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -24,8 +27,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -44,14 +47,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "tweet_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "tweet_id", null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -72,8 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
 
   create_table "likes", force: :cascade do |t|
     t.string "likeable_type", null: false
-    t.integer "likeable_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "likeable_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
@@ -81,15 +84,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
   end
 
   create_table "pay_charges", force: :cascade do |t|
-    t.integer "customer_id", null: false
-    t.integer "subscription_id"
+    t.bigint "customer_id", null: false
+    t.bigint "subscription_id"
     t.string "processor_id", null: false
     t.integer "amount", null: false
     t.string "currency"
     t.integer "application_fee_amount"
     t.integer "amount_refunded"
-    t.json "metadata"
-    t.json "data"
+    t.jsonb "metadata"
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_charges_on_customer_id_and_processor_id", unique: true
@@ -98,11 +101,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
 
   create_table "pay_customers", force: :cascade do |t|
     t.string "owner_type"
-    t.integer "owner_id"
+    t.bigint "owner_id"
     t.string "processor", null: false
     t.string "processor_id"
     t.boolean "default"
-    t.json "data"
+    t.jsonb "data"
     t.datetime "deleted_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -112,29 +115,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
 
   create_table "pay_merchants", force: :cascade do |t|
     t.string "owner_type"
-    t.integer "owner_id"
+    t.bigint "owner_id"
     t.string "processor", null: false
     t.string "processor_id"
     t.boolean "default"
-    t.json "data"
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_type", "owner_id", "processor"], name: "index_pay_merchants_on_owner_type_and_owner_id_and_processor"
   end
 
   create_table "pay_payment_methods", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.string "processor_id", null: false
     t.boolean "default"
     t.string "type"
-    t.json "data"
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_payment_methods_on_customer_id_and_processor_id", unique: true
   end
 
   create_table "pay_subscriptions", force: :cascade do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.string "name", null: false
     t.string "processor_id", null: false
     t.string "processor_plan", null: false
@@ -143,8 +146,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
     t.datetime "trial_ends_at", precision: nil
     t.datetime "ends_at", precision: nil
     t.decimal "application_fee_percent", precision: 8, scale: 2
-    t.json "metadata"
-    t.json "data"
+    t.jsonb "metadata"
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id", "processor_id"], name: "index_pay_subscriptions_on_customer_id_and_processor_id", unique: true
@@ -153,14 +156,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_160253) do
   create_table "pay_webhooks", force: :cascade do |t|
     t.string "processor"
     t.string "event_type"
-    t.json "event"
+    t.jsonb "event"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "tweets", force: :cascade do |t|
     t.text "body"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tweet_id"
