@@ -5,8 +5,12 @@
     </div>
     <div class="flex-1">
       <p class="font-bold float-left pr-1"><%= link_to comment.user.name, profile_path(comment.user), class: "hover:underline", data: { turbo: false } %> </p> 
-      <p class="">• <%= comment.created_at.strftime("#{comment.created_at.day.ordinalize} %B") %></p>
-      <%= time_ago_in_words(comment.created_at) %>
+      
+      <% if comment.created_at.strftime("%d") == Time.now.strftime("%d") %>
+        <p class="">• <%= time_ago_in_words(comment.created_at) %> ago</p>
+      <% else %>
+        <p class="">• <%= comment.created_at.strftime("#{comment.created_at.day.ordinalize} %B") %></p>
+      <% end %>
       
       <div class="prose prose-lg"><%= comment.body %></div>
 
