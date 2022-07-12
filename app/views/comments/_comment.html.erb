@@ -4,7 +4,9 @@
       <%= profile_image(comment.user) %>
     </div>
     <div class="flex-1">
-      <p class="font-bold"><%= link_to comment.user.name, profile_path(comment.user), class: "hover:underline", data: { turbo: false } %></p>
+      <p class="font-bold float-left"><%= link_to comment.user.name, profile_path(comment.user), class: "hover:underline", data: { turbo: false } %> </p> 
+      <%= comment.created_at.strftime("#{comment.created_at.day.ordinalize} %B") %>
+      
       <div class="prose prose-lg"><%= comment.body %></div>
 
       <ul class="-ml-3 flex space-x-14 items-start justify-start list-none">

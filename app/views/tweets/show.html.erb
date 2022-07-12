@@ -16,7 +16,7 @@
       </h1>
       <p class="text-gray-700"><%= "@" + @tweet.user.username %></p>
     </div>
-  </div>
+  </div class>
   <div class="prose prose-2xl text-gray-900 my-3">
     <% if @tweet.tweet_id? %>
       <%= @tweet.tweet.body %>
@@ -24,7 +24,9 @@
       <%= @tweet.body %>
     <% end %>
   </div>
-
+  <div>
+    <%= @tweet.created_at.strftime("#{@tweet.created_at.day.ordinalize} %B %Y") %>
+  </div>
   <ul class="py-3 border-t text-gray-700 flex space-x-4 text-sm">
     <li>
       <span class="font-semibold text-gray-800"><%= Tweet.where(tweet_id: @tweet).size %></span> Retweets
