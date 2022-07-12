@@ -9,6 +9,10 @@ module ApplicationHelper
     }.stringify_keys[flash_type.to_s] || flash_type.to_s
   end
 
+  def time_ago_in_words(from_time, include_seconds_or_options = {})
+    distance_of_time_in_words(from_time, Time.now, include_seconds_or_options)
+  end
+
   def nav_classes
     ["devise/registrations", "devise/sessions", "devise/confirmations", "devise/passwords", "devise/unlocks"].include?(params[:controller]) ? "hidden" : nil
   end

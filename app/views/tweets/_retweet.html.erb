@@ -8,7 +8,10 @@
       <%= profile_image(tweet.tweet.user) %>
     </div>
     <div class="flex-1">
-      <p class="font-bold"><%= link_to tweet.tweet.user.name, profile_path(tweet.tweet.user), class: "hover:underline", data: {turbo: false} %></p>
+      <div>
+      <p class="font-bold float-left pr-1"><%= link_to tweet.tweet.user.name, profile_path(tweet.tweet.user), class: "hover:underline", data: {turbo: false} %></p>
+      <p class="ml-3">• <%= tweet.tweet.created_at.strftime("#{tweet.tweet.created_at.day.ordinalize} %B") %></p>
+      </div>
       <%= link_to tweet, data: { turbo: false } do %>
         <div class="prose prose-lg"><%= tweet.tweet.body %></div>
       <% end %>
