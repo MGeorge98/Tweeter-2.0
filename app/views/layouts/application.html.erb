@@ -35,7 +35,7 @@
           <%= content_for?(:content) ? yield(:content) : yield %>
         </div>
         <div class="lg:col-span-2 pl-6 pt-6 float right">
-          <div class="bg-gray-100 w-full min-h-[350px] min-w-[520px] rounded-lg p-6 mb-6">Sidebar stuff</div>
+          <div class="bg-gray-100 w-full min-h-[350px] min-w-[450px] rounded-lg p-6 mb-6">Sidebar stuff</div>
           <% if user_signed_in? %>
             <p class="mb-6">
               Signed in as <%= current_user.name %>
