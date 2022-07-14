@@ -83,3 +83,4 @@ gem "pay", "~> 3.0"
 gem "stripe", ">= 2.8", "< 6.0"
 
 gem "pagy", "~> 5.10"
+gem 'rubocop', '~> 1.31', require: false
